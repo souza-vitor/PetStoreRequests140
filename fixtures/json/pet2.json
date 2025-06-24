@@ -1,0 +1,18 @@
+{
+  "id": 173754901,
+  "category": {
+    "id": 1,
+    "name": "dog"
+  },
+  "name": "Sadaharu",
+  "photoUrls": [
+    ""
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "name": "vacinado"
+    }
+  ],
+  "status": "sold"
+}
