@@ -29,4 +29,24 @@ def test_post_pet():
     assert response.status_code == 200
     assert response_body['id'] == pet_id
     assert response_body['name'] == pet_name
-    assert response_body['category.name'] == pet_category_name
+    assert response_body['category']['name'] == pet_category_name
+    assert response_body['tags'][0]['name'] == pet_tag_name
+    assert response_body['tags'][0]['id'] == pet_tag_id
+    assert response_body['status'] == pet_status
+
+
+def test_get_pet():
+
+    response = requests.get(
+        url=f"{url}/{pet_id}",
+        headers=headers
+        #não tem body
+    )
+
+    response_body = response.json()
+
+    assert response.status_code == 200
+    assert response_body['name'] == pet_name
+    assert response_body['category']['id'] == pet_category_id
+    assert response_body['tags'][0]['id'] == pet_tag_id
+    assert response_body['status'] == pet_status
