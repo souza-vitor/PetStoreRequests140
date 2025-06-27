@@ -1,0 +1,4 @@
+pet_id,category_id,category_name,pet_name,tags,status
+173549001,1,dog,Oddie,1-vacinado;2-vermifugado,available
+173549002,2,cat,Sakamoto,1-vacinado,available
+173549003,5,capybara,Raijinmaru,3-raro,available
