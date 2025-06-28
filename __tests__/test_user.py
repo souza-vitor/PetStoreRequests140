@@ -2,6 +2,8 @@ import pytest
 import requests
 import json
 
+from utils.utils import ler_csv
+
 user_id = 173549010
 username = "mirosantana99"
 user_first_name = "Miro"
