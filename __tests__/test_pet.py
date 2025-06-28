@@ -118,7 +118,7 @@ def test_post_pet_dinamico(pet_id,category_id,category_name,pet_name,tags,status
     pet['status'] = status
 
     pet = json.dumps(obj=pet, indent=4)
-    print('\n' + pet)
+    #print('\n' + pet)
 
     response = requests.post(
         url=url,
