@@ -84,3 +84,48 @@ def test_user_delete():
     assert response_body['code'] == 200
     assert response_body['type'] == 'unknown'
     assert response_body['message'] == str(username)
+
+
+@pytest.mark.parametrize('user_id,username,user_first_name,user_last_name,user_email,user_password,user_phone,user_status',
+                         ler_csv('./fixtures/csv/users.csv'))
+def test_user_post_dinamico(user_id,username,user_first_name,user_last_name,user_email,user_password,user_phone,user_status):
+    user = {}
+    user['id'] = int(user_id)
+    user['username'] = username
+    user['firstName'] = user_first_name
+    user['lastName'] = user_last_name
+    user['email'] = user_email
+    user['password'] = user_password
+    user['phone'] = user_phone
+    user['userStatus'] = int(user_status)
+
+    user = json.dumps(obj=user, indent=4)
+
+    response = requests.post(
+        url=url,
+        headers=headers,
+        data=user,
+        timeout=5
+    )
+
+    response_body = response.json()
+
+    assert response.status_code == 200
+    assert response_body['code'] == 200
+    assert response_body['type'] == 'unknown'
+    assert response_body['message'] == str(user_id)
+
+@pytest.mark.parametrize('user_id,username',
+                         ler_csv('./fixtures/csv/users_delete.csv'))
+def test_user_delete_dinamico(user_id,username):
+    response = requests.delete(
+        url=f"{url}/{username}",
+        headers=headers
+    )
+
+    response_body = response.json()
+
+    assert response.status_code == 200
+    assert response_body['code'] == 200
+    assert response_body['type'] == 'unknown'
+    assert response_body['message'] == str(username)

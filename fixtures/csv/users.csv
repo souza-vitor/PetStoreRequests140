@@ -1,0 +1,6 @@
+user_id,username,user_first_name,user_last_name,user_email,user_password,user_phone,user_status
+17375491001,alice_wonder,Alice,Wonderland,alice@wondermail.com,passAlice2025,5521981001001,1
+17375491002,bob_builder,Bob,Builder,bob@buildit.com,buildR0cks,5521981001002,2
+17375491003,charlie_choco,Charlie,Bucket,charlie@choco.com,goldenTicket,5521981001003,0
+17375491004,dora_explorer,Dora,Explorer,dora@exploremail.com,backpack123,5521981001004,1
+17375491005,eddy_edge,Eddy,Edge,eddy@edgecase.com,Edg3P@ss,5521981001005,2
