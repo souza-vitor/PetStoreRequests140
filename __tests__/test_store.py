@@ -1,6 +1,7 @@
 import pytest 
 import requests
 import json
+import time
 
 order_id = 173549300
 pet_id = 173754901
@@ -12,7 +13,7 @@ complete = True
 url="https://petstore.swagger.io/v2/store/order"
 headers={'Content-Type': 'application/json'}
 
-
+@pytest.mark.order(1)
 def test_order_post():
     order=open('./fixtures/json/order1.json')       
     data=json.loads(order.read())
@@ -30,8 +31,9 @@ def test_order_post():
     assert response_body['id'] == order_id
     assert response_body['shipDate'] == order_ship_date
     assert response_body['complete'] == True
+    time.sleep(4)
 
-
+@pytest.mark.order(2)
 def test_order_get():
 
     response = requests.get(
@@ -45,8 +47,9 @@ def test_order_get():
     assert response_body['id'] == order_id
     assert response_body['petId'] == pet_id
     assert response_body['shipDate'] == order_ship_date
+    time.sleep(2)
 
-
+@pytest.mark.order(3)
 def test_order_delete():
 
     response = requests.delete(
@@ -60,3 +63,4 @@ def test_order_delete():
     assert response_body['code'] == 200
     assert response_body['type'] == 'unknown'
     assert response_body['message'] == str(order_id)
+    time.sleep(2)

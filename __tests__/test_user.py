@@ -1,10 +1,12 @@
 import pytest 
 import requests
 import json
+import time
+
 
 from utils.utils import ler_csv
 
-user_id = 173549010
+user_id = 173549111
 username = "mirosantana99"
 user_first_name = "Miro"
 user_last_name = "Santana"
@@ -17,6 +19,7 @@ url="https://petstore.swagger.io/v2/user"
 headers={'Content-Type': 'application/json'}
 
 
+@pytest.mark.order(1)
 def test_user_post():
     user=open("./fixtures/json/user1.json")
     data=json.loads(user.read())
@@ -35,8 +38,10 @@ def test_user_post():
     assert response_body['code'] == 200
     assert response_body['type'] == 'unknown'
     assert response_body['message'] == str(user_id)
+    time.sleep(4)
 
 
+@pytest.mark.order(2)
 def test_user_get():
     response = requests.get(
         url=f'{url}/{username}',
@@ -50,8 +55,10 @@ def test_user_get():
     assert response_body['username'] == username
     assert response_body['email'] == user_email
     #assert response_body['userStatus'] == user_status
+    time.sleep(2)
 
 
+@pytest.mark.order(3)
 def test_user_put():
     user=open("./fixtures/json/user2.json")
     data=json.loads(user.read())
@@ -70,7 +77,10 @@ def test_user_put():
     assert response_body['code'] == 200
     assert response_body['type'] == 'unknown'
     assert response_body['message'] == str(user_id)
+    time.sleep(2)
 
+
+@pytest.mark.order(4)
 def test_user_delete():
 
     response = requests.delete(
@@ -84,8 +94,10 @@ def test_user_delete():
     assert response_body['code'] == 200
     assert response_body['type'] == 'unknown'
     assert response_body['message'] == str(username)
+    #time.sleep(4)
 
 
+@pytest.mark.order(5)
 @pytest.mark.parametrize('user_id,username,user_first_name,user_last_name,user_email,user_password,user_phone,user_status',
                          ler_csv('./fixtures/csv/users.csv'))
 def test_user_post_dinamico(user_id,username,user_first_name,user_last_name,user_email,user_password,user_phone,user_status):
@@ -114,7 +126,10 @@ def test_user_post_dinamico(user_id,username,user_first_name,user_last_name,user
     assert response_body['code'] == 200
     assert response_body['type'] == 'unknown'
     assert response_body['message'] == str(user_id)
+    #time.sleep(4)
 
+
+@pytest.mark.order(6)
 @pytest.mark.parametrize('user_id,username',
                          ler_csv('./fixtures/csv/users_delete.csv'))
 def test_user_delete_dinamico(user_id,username):
@@ -129,3 +144,4 @@ def test_user_delete_dinamico(user_id,username):
     assert response_body['code'] == 200
     assert response_body['type'] == 'unknown'
     assert response_body['message'] == str(username)
+    time.sleep(4)
